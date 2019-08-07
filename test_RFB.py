@@ -19,19 +19,6 @@ from utils.timer import Timer
 from utils.visualize import print_info
 from tqdm import tqdm
 
-# weights/epoches_112.pth
-# Finished loading model!
-# 100%|███████████████████████████████████████| 2007/2007 [00:58<00:00, 34.07it/s]
-# Evaluating detections
-# Writing person VOC results file
-# VOC07 metric? Yes
-# AP for person = 0.7993
-# Mean AP = 0.7993
-# ~~~~~~~~
-# Results:
-# 0.799
-# 0.799
-# ~~~~~~~~
 parser = argparse.ArgumentParser(description='Receptive Field Block Net')
 parser.add_argument('-m', '--trained_model', default='weights/epoches_112.pth',
                     type=str, help='Trained state_dict file path to open')
@@ -102,7 +89,7 @@ def test_net(save_folder, net, detector, cuda, testset, transform, max_per_image
             c_dets = np.hstack((c_bboxes, c_scores[:, np.newaxis])).astype(
                 np.float32, copy=False)
 
-            keep = nms(c_dets, 0.45, force_cpu=args.cpu)
+            keep = nms(c_dets, 0.7, force_cpu=args.cpu)
             c_dets = c_dets[keep, :]
             all_boxes[j][i] = c_dets
 
@@ -144,7 +131,7 @@ if __name__ == '__main__':
     net.eval()
     print('Finished loading model!')
     # load data
-    testset = VOCDetection(VOCroot, [('2007', 'person_test')], None, AnnotationTransform())
+    testset = VOCDetection(VOCroot, [('2007', 'test')], None, AnnotationTransform())
 
     if args.cuda:
         net = net.cuda()
