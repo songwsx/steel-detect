@@ -10,8 +10,11 @@
 
 2. 将RFB编译好的utils里的文件夹build,nms替换数钢筋代码的utils/build,utils/nms即可
 
-3. 修改data/config.py中的数据集路径`VOCroot = '/home/common/wangsong/SteelVOC'
+3. 新建一个文件夹SteelVOC，将钢筋数据集的VOC2007文件夹移动到SteelVOC中，例如我的就是/home/common/wangsong/SteelVOC/VOC2007
+
+3. 修改data/config.py中的SteelVOC数据集路径`VOCroot = '/home/common/wangsong/SteelVOC'
 ` 改为自己数据集对应的路径
+
 
 4. 运行train_RFB
 
